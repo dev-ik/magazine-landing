@@ -22,7 +22,7 @@ run_tests:
   script:
     - sh build-test.sh
     - sh test.sh
-#    - sh stop-test.sh
+    - sh stop-test.sh
   artifacts:
     when: on_failure
     paths:

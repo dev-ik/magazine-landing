@@ -9,5 +9,3 @@ cd ${DOCKER_DIR}
 fi
 
 docker-compose down -v
-
-echo 'build complete'
