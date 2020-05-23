@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+  magazine-test-db:
+    image: percona:5.7.24-centos
+    restart: always
+    networks:
+      - magazine
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_TEST}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD_TEST}
+    ports:
+      - ${MYSQL_HOST_PORT_TEST}:3306
+
+  magazine-php:
+    depends_on:
+      - magazine-test-db
+    restart: always
+    build:
+      context: .
+      dockerfile: .docker/php/DockerfileTest
+    networks:
+      - magazine
+    volumes:
+      - .:/var/www/magazine.docker
+      - .docker/php/php-fpm.d:/etc/php-fpm.d
+      - .docker/php/php.d/0-main.ini:/etc/php.d/0-main.ini
+      - .docker/php/php.d/10-tzone.ini:/etc/php.d/10-tzone.ini
+
+  magazine-nginx:
+    image: nginx:1.15-alpine
+    depends_on:
+      - magazine-php
+    networks:
+      - magazine
+    volumes:
+      - .:/var/www/magazine.docker
+      - .docker/nginx/magazine.conf:/etc/nginx/conf.d/magazine.conf
+      - .docker/nginx/cert/magazine.docker.pem:/etc/nginx/certs/magazine.docker.crt
+      - .docker/nginx/cert/magazine.docker-key.pem:/etc/nginx/certs/magazine.docker.key
+    ports:
+      - 81:80
+networks:
+  magazine:
+    driver: bridge

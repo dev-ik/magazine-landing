@@ -1,0 +1,5 @@
+.idea
+/vendor/
+/views/compilation_cache
+.env
+./docker-compose.yml

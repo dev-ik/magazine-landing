@@ -1,0 +1,32 @@
+{
+    "name":"devik/landing-page-magazine",
+    "description": "Landing Page Magazine",
+    "authors":[
+        {
+            "name": "DevIK",
+            "email": "igorskinner@gmail.com",
+            "homepage": "https://gitlab.com/dev_ik"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4" : {
+            "classes\\" : "classes",
+            "classes\\query\\" : "classes/query",
+            "components\\" : "components",
+            "helpers\\" : "helpers",
+            "controllers\\" : "controllers",
+            "interfaces\\" : "interfaces",
+            "models\\" : "models"
+        }
+    },
+    "require": {
+        "codeception/codeception": "*",
+        "symfony/dotenv": "^4.0",
+        "sentry/sentry": "^1.9",
+        "vlucas/phpdotenv": "^2.5",
+        "robmorgan/phinx": "^0.10.6",
+        "twig/twig": "1.*",
+        "psr/log": "^1.1"
+    }
+}

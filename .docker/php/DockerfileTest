@@ -1,0 +1,9 @@
+FROM d8vik/centos-php7.4:latest
+
+COPY / /var/www/magazine.docker
+
+WORKDIR /var/www/magazine.docker
+
+EXPOSE 9000
+EXPOSE 9001
+CMD php-fpm -F -R

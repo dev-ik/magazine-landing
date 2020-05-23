@@ -1,0 +1,31 @@
+debug = false
+
+logLevel = "ERROR"
+defaultEntryPoints = ["https","http"]
+
+[web]
+address = ":8080"
+
+[http.middlewares]
+  [http.middlewares.testHeader.headers]
+	frameDeny = true
+    sslRedirect = true
+    accessControlAllowMethods= ["GET", "POST"]
+    accessControlMaxAge = 100
+    addVaryHeader = true
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+# Раскомментировать для автоматическго редиректа с http на https
+#	[entryPoints.http.redirect]
+#    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+                certFile = "/etc/ssl/traefik.docker.crt"
+                keyFile = "/etc/ssl/traefik.docker.key"
+		  [[entryPoints.https.tls.certificates]]
+			    certFile = "/etc/ssl/magazine.docker.crt"
+			    keyFile = "/etc/ssl/magazine.docker.key"

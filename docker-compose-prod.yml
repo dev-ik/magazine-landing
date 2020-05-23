@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  magazine-db:
+    image: percona:5.7.24-centos
+    restart: always
+    networks:
+      - magazine
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_HOST_PORT}:3306
+    volumes:
+      - .docker/mysql/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
+
+  magazine-php:
+    depends_on:
+      - magazine-db
+    restart: always
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    networks:
+      - magazine
+    volumes:
+      - .:/var/www/magazine.docker
+      - .docker/php/php-fpm.d:/etc/php-fpm.d
+      - .docker/php/php.d/0-main.ini:/etc/php.d/0-main.ini
+      - .docker/php/php.d/10-tzone.ini:/etc/php.d/10-tzone.ini
+
+  magazine-nginx:
+    image: nginx:1.15-alpine
+    depends_on:
+      - magazine-php
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:magazine.docker
+      - traefik.docker.network=proxy
+    networks:
+      - magazine
+      - proxy
+    volumes:
+      - .:/var/www/magazine.docker
+      - .docker/nginx/magazine.conf:/etc/nginx/conf.d/magazine.conf
+      - .docker/nginx/cert/magazine.docker.pem:/etc/nginx/certs/magazine.docker.crt
+      - .docker/nginx/cert/magazine.docker-key.pem:/etc/nginx/certs/magazine.docker.key
+    ports:
+      - 81:80
+networks:
+  proxy:
+    external: true
+  magazine:
+    driver: bridge

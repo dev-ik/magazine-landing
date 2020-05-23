@@ -1,0 +1,68 @@
+{% extends layout %}
+{% block title %} Shopping Cart {% endblock %}
+{% block content %}
+  <section id="cart_items">
+    <div class="container">
+      <div class="breadcrumbs">
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li class="active">Shopping Cart</li>
+        </ol>
+      </div>
+        {% if cartProducts is not empty %}
+
+          <div class="table-responsive cart_info">
+              <table class="table table-condensed">
+              <thead>
+              <tr class="cart_menu">
+                <td class="image">Item</td>
+                <td class="description"></td>
+                <td class="price">Price</td>
+                <td class="quantity">Quantity</td>
+                <td class="total">Total</td>
+                <td></td>
+              </tr>
+              </thead>
+              <tbody>
+              {% set totalSum = 0  %}
+                {% for cartProduct in cartProducts  %}
+                    {% set totalSum = totalSum + cartProduct.price %}
+                <tr class="cart_product_{{ cartProduct.id }} checkout-product" data-product="{{ cartProduct.id }}">
+                <td class="cart_product" >
+                  <a href=""><img src="/src/images/product/cart/product{{ cartProduct.id }}.jpg" alt=""></a>
+                </td>
+                <td class="cart_description">
+                  <h4><a href="">{{ cartProduct.name }}</a></h4>
+                </td>
+                <td class="cart_price">
+                  <p>${{ cartProduct.price }}</p>
+                </td>
+                <td class="cart_quantity">
+                  <div class="cart_quantity_button">
+                    <p>1</p>
+                  </div>
+                </td>
+                <td class="cart_total">
+                  <p class="cart_total_price">${{ cartProduct.price }}</p>
+                </td>
+                <td class="cart_delete">
+                  <a class="cart_quantity_delete js-delete-product" data-id="{{ cartProduct.id }}" href=""><i class="fa fa-times"></i></a>
+                </td>
+              </tr>
+                {% endfor %}
+              <tr>
+                  <td colspan="6" class="checkout-button"><a class="btn btn-default js-check-out" href="#">Check Out</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        {% endif %}
+
+        <div class="alert alert-danger cart-empty" {% if cartProducts is not empty %} style="display:none;" {% endif %}>
+            Your cart is empty
+        </div>
+
+    </div>
+  </section> <!--/#cart_items-->
+{% endblock %}

@@ -1,0 +1,23 @@
+class_name: FunctionalTester
+modules:
+    enabled:
+    - Asserts
+    - Helper\Functional
+    - PhpBrowser
+    - Db
+    - REST:
+        depends: PhpBrowser
+    config:
+        Db:
+            dsn: 'mysql:host=%MYSQL_HOST_TEST%;dbname=%MYSQL_DB_NAME%;port=%MYSQL_PORT_TEST%'
+            user: '%MYSQL_USER%'
+            password: '%MYSQL_PASSWORD_TEST%'
+            populate: true
+            cleanup: true
+            dump: 'tests/_data/dump.sql'
+        PhpBrowser:
+            url: https://%TEST_HOST%/
+            cookies:
+                cookie-1:
+                    Name: IS_TEST
+                    Value: true

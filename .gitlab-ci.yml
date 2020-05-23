@@ -1,0 +1,29 @@
+image: halfb00t/docker-compose:1.22
+
+services:
+  - docker:dind
+
+before_script:
+  - docker version
+  - docker-compose -v
+
+variables:
+  GIT_DEPTH: "1"
+  GET_SOURCES_ATTEMPTS: "3"
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - tests
+
+run_tests:
+  stage: tests
+  before_script:
+    - cd .docker/scripts/
+  script:
+    - sh build-test.sh
+    - sh test.sh
+#    - sh stop-test.sh
+  artifacts:
+    when: on_failure
+    paths:
+      - tests/_output/*.*

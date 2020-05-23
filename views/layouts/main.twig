@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="_csrf" content="{{ _csrf() }}">
+    <title>{% block title %}{% endblock %} | E-Shopper</title>
+    <link href="/src/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/src/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/src/css/animate.css" rel="stylesheet">
+    <link href="/src/css/main.css" rel="stylesheet">
+    <link href="/src/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="/src/js/html5shiv.js"></script>
+    <![endif]-->
+</head><!--/head-->
+
+<body>
+<header id="header"><!--header-->
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="/"><img src="/src/images/home/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-middle-->
+</header><!--/header-->
+
+    {% block content %}
+    {% endblock %}
+
+<footer id="footer"><!--Footer-->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+            </div>
+        </div>
+    </div>
+
+</footer><!--/Footer-->
+
+
+<script src="/src/js/jquery.js"></script>
+<script src="/src/js/bootstrap.min.js"></script>
+<script src="/src/js/jquery.scrollUp.min.js"></script>
+<script src="/src/js/main.js"></script>
+</body>
+</html>

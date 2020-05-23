@@ -1,0 +1,59 @@
+{% extends layout %}
+{% block title %} Home {% endblock %}
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 padding-right">
+
+                    <div class="category-tab"><!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                {% for category in categories %}
+                                    <li {% if loop.index == 1 %} class="active" {% endif %}><a
+                                                href="#category{{ category.id }}"
+                                                data-toggle="tab">{{ category.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            {% for category in categories %}
+                                <div class="tab-pane fade {% if loop.index == 1 %} active {% endif %} in"
+                                     id="category{{ category.id }}">
+                                    {% for product in products[ category.id ] %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="/src/images/product/product{{ product.id }}.jpg"
+                                                             alt=""/>
+                                                        <h2>{{ product.price }}</h2>
+                                                        <p>{{ product.name }}</p>
+                                                        {% if product.id in userProducts %}
+                                                            {% set btnText = 'in cart' %}
+                                                            {% set href = '/cart' %}
+                                                        {% else %}
+                                                            {% set btnText = '<i class="fa fa-shopping-cart"></i>Add to cart' %}
+                                                            {% set href = '#' %}
+                                                        {% endif %}
+                                                        <a href="{{ href }}" data-id="{{ product.id }}"
+                                                           class="btn btn-default {% if href == '#' %} add-to-cart {% endif %} js-product-{{ product.id }}">
+                                                            {{ btnText|raw }}
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div><!--/category-tab-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
