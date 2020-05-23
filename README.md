@@ -8,7 +8,7 @@
     docker-compose up -d
 ```
 
-####Запускаем проект
+#### Запускаем проект
 - Зайти в папку с проектом
 - Переименовать `example.env` в `.env`
 - Для разработки переименовать `docker-compose-dev.yml` в `docker-compose.yml`
