@@ -1,3 +1,11 @@
+#### Установка
+```
+    php composer.phar create-project --stability=stable --prefer-dist devik/magazine-landing
+```
+или
+```
+    composer create-project --stability=stable --prefer-dist devik/magazine-landing
+```
 #### Для использования Traefik
 - создаем сеть для связи Traefik и других контейнеров
 - переходим в папку с Traefik
