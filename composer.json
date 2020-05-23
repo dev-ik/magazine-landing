@@ -1,6 +1,8 @@
 {
-    "name":"devik/landing-page-magazine",
-    "description": "Landing Page Magazine",
+    "name":"devik/magazine-landing",
+    "description": "MVC for a landing page with a folder and bucket. Suitable for creating landing pages etc.",
+    "type": "project",
+    "minimum-stability": "stable",
     "authors":[
         {
             "name": "DevIK",
@@ -21,12 +23,19 @@
         }
     },
     "require": {
-        "codeception/codeception": "*",
+        "php": ">=7.4",
+        "codeception/codeception": "^4.1.4",
         "symfony/dotenv": "^4.0",
         "sentry/sentry": "^1.9",
         "vlucas/phpdotenv": "^2.5",
         "robmorgan/phinx": "^0.10.6",
         "twig/twig": "1.*",
         "psr/log": "^1.1"
+    },
+    "require-dev": {
+        "codeception/module-asserts": "^1.2",
+        "codeception/module-phpbrowser": "^1.0",
+        "codeception/module-db": "^1.0",
+        "codeception/module-rest": "^1.2"
     }
 }
