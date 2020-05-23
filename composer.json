@@ -2,7 +2,7 @@
     "name":"devik/magazine-landing",
     "description": "MVC for a landing page with a folder and bucket. Suitable for creating landing pages etc.",
     "type": "project",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "authors":[
         {
             "name": "DevIK",
