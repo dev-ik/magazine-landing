@@ -34,6 +34,11 @@
     docker-compose exec magazine-php ./vendor/bin/codecept run   
 ```
 
+#### Иcпользование миграций   
+```
+    docker-compose exec magazine-php php migration
+```
+
 Дашбоард `Traefik` будет доступен по адресу traefik.docker (при не обходимости внесите правки в `hosts`) как по http так и по https.
 Проект будет доступен по адресу magazine.docker (при не обходимости внесите правки в `hosts`) как по http так и по https
 Для корректной работы https на `localhost` рекомендую использовать [mkcert](https://github.com/FiloSottile/mkcert)
